@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — NexusAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="dashboard-page">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="/" class="logo">
+        <span class="logo-icon">◆</span>
+        <span class="logo-text">Nexus<em>AI</em></span>
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        AI Assistant
+      </a>
+      <a href="/" class="sidebar-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Home
+      </a>
+      <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="sidebar-link">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 .005 5.367.005 11.993c0 2.117.55 4.104 1.508 5.831L0 24l6.335-1.652A11.955 11.955 0 0011.998 24c6.626 0 11.993-5.367 11.993-11.993C23.991 5.367 18.624 0 11.998 0zm0 21.818a9.824 9.824 0 01-5.012-1.373l-.359-.215-3.722.97.993-3.623-.236-.373a9.795 9.795 0 01-1.504-5.204c0-5.42 4.411-9.831 9.84-9.831 5.43 0 9.841 4.411 9.841 9.831 0 5.419-4.411 9.818-9.841 9.818z"/></svg>
+        WhatsApp Support
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info" id="userInfo">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <div class="user-details">
+          <div class="user-email" id="userEmail">Loading…</div>
+          <div class="user-badge" id="userBadge">—</div>
+        </div>
+      </div>
+      <button class="logout-btn" id="logoutBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <div class="dash-topbar">
+      <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="dash-title">AI Business Assistant</div>
+      <div class="dash-status">
+        <span class="online-dot"></span>
+        <span id="statusText">Connecting…</span>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loadingState" class="dash-loading">
+      <div class="loading-spinner"></div>
+      <p>Loading your assistant…</p>
+    </div>
+
+    <!-- Locked State -->
+    <div id="lockedState" class="locked-state" style="display:none">
+      <div class="locked-card">
+        <div class="locked-icon">🔒</div>
+        <h2>Trial Period Ended</h2>
+        <p>Your 2-day free trial has expired. Activate your account to continue using NexusAI.</p>
+        <div class="locked-steps">
+          <div class="locked-step">
+            <div class="step-num">1</div>
+            <div>Send payment via <strong>PayPal</strong> to <code>kingtizian008@gmail.com</code></div>
+          </div>
+          <div class="locked-step">
+            <div class="step-num">2</div>
+            <div>Contact support for instant activation</div>
+          </div>
+        </div>
+        <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--large">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 .005 5.367.005 11.993c0 2.117.55 4.104 1.508 5.831L0 24l6.335-1.652A11.955 11.955 0 0011.998 24c6.626 0 11.993-5.367 11.993-11.993C23.991 5.367 18.624 0 11.998 0zm0 21.818a9.824 9.824 0 01-5.012-1.373l-.359-.215-3.722.97.993-3.623-.236-.373a9.795 9.795 0 01-1.504-5.204c0-5.42 4.411-9.831 9.84-9.831 5.43 0 9.841 4.411 9.841 9.831 0 5.419-4.411 9.818-9.841 9.818z"/></svg>
+          WhatsApp 0742251656
+        </a>
+        <p class="locked-note">Access requires payment confirmation. Send payment via PayPal to <strong>kingtizian008@gmail.com</strong> and contact support on WhatsApp <strong>0742251656</strong> for activation.</p>
+      </div>
+    </div>
+
+    <!-- Chat Interface -->
+    <div id="chatState" class="chat-interface" style="display:none">
+      <div class="chat-info-bar" id="chatInfoBar"></div>
+      <div class="chat-messages-wrap" id="chatMessagesWrap">
+        <div class="messages-list" id="messagesList">
+          <!-- Welcome message injected by JS -->
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <div class="chat-input-wrap">
+          <textarea
+            id="chatInput"
+            placeholder="Ask me anything about growing your business…"
+            rows="1"
+            maxlength="2000"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" aria-label="Send message">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+        <div class="chat-footer-note">NexusAI may occasionally make mistakes. Verify important information.</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Contact on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 .005 5.367.005 11.993c0 2.117.55 4.104 1.508 5.831L0 24l6.335-1.652A11.955 11.955 0 0011.998 24c6.626 0 11.993-5.367 11.993-11.993C23.991 5.367 18.624 0 11.998 0zm0 21.818a9.824 9.824 0 01-5.012-1.373l-.359-.215-3.722.97.993-3.623-.236-.373a9.795 9.795 0 01-1.504-5.204c0-5.42 4.411-9.831 9.84-9.831 5.43 0 9.841 4.411 9.841 9.831 0 5.419-4.411 9.818-9.841 9.818z"/></svg>
+  </a>
+
+  <script>
+    // ─── State ───────────────────────────────────────────────────────────────
+    let conversationHistory = [];
+    let isSending = false;
+    let currentUser = null;
+
+    // ─── Elements ────────────────────────────────────────────────────────────
+    const loadingState = document.getElementById('loadingState');
+    const lockedState = document.getElementById('lockedState');
+    const chatState = document.getElementById('chatState');
+    const messagesList = document.getElementById('messagesList');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const userEmail = document.getElementById('userEmail');
+    const userBadge = document.getElementById('userBadge');
+    const userAvatar = document.getElementById('userAvatar');
+    const statusText = document.getElementById('statusText');
+    const chatInfoBar = document.getElementById('chatInfoBar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    // ─── Sidebar toggle ──────────────────────────────────────────────────────
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+    });
+
+    // ─── Init ─────────────────────────────────────────────────────────────────
+    async function init() {
+      try {
+        const res = await fetch('/api/user');
+        if (res.status === 401) { window.location.href = '/login'; return; }
+        const user = await res.json();
+        currentUser = user;
+
+        userEmail.textContent = user.email;
+        userAvatar.textContent = user.email[0].toUpperCase();
+
+        if (user.is_paid) {
+          userBadge.textContent = '✓ Premium';
+          userBadge.className = 'user-badge badge--paid';
+        } else if (!user.trial_expired) {
+          const expiry = new Date(user.trial_end);
+          const hoursLeft = Math.max(0, Math.round((expiry - Date.now()) / 3600000));
+          userBadge.textContent = `Trial · ${hoursLeft}h left`;
+          userBadge.className = 'user-badge badge--trial';
+        } else {
+          userBadge.textContent = 'Trial Expired';
+          userBadge.className = 'user-badge badge--expired';
+        }
+
+        loadingState.style.display = 'none';
+
+        if (user.has_access) {
+          chatState.style.display = 'flex';
+          statusText.textContent = 'Online';
+
+          // Info bar
+          if (!user.is_paid && !user.trial_expired) {
+            const expiry = new Date(user.trial_end);
+            const hoursLeft = Math.max(0, Math.round((expiry - Date.now()) / 3600000));
+            chatInfoBar.innerHTML = `⏰ Trial ends in <strong>${hoursLeft} hour${hoursLeft !== 1 ? 's' : ''}</strong>. <a href="https://wa.me/0742251656" target="_blank">Upgrade now →</a>`;
+            chatInfoBar.style.display = 'block';
+          }
+
+          addWelcomeMessage();
+        } else {
+          lockedState.style.display = 'flex';
+          statusText.textContent = 'Access Locked';
+        }
+      } catch (e) {
+        console.error('Init error:', e);
+        loadingState.innerHTML = '<p style="color:var(--clr-error)">Failed to load. Please refresh the page.</p>';
+      }
+    }
+
+    // ─── Welcome Message ─────────────────────────────────────────────────────
+    function addWelcomeMessage() {
+      const welcome = `Hello! I'm your NexusAI Business Assistant. I'm here to help you:
+
+• Qualify and convert leads faster
+• Automate customer engagement
+• Optimise your sales process
+
+What business challenge can I help you tackle today?`;
+      addMessage('assistant', welcome);
+    }
+
+    // ─── Add Message to UI ───────────────────────────────────────────────────
+    function addMessage(role, content, isTyping = false) {
+      const wrap = document.createElement('div');
+      wrap.className = `message message--${role}${isTyping ? ' message--typing' : ''}`;
+
+      if (role === 'assistant') {
+        const avatar = document.createElement('div');
+        avatar.className = 'msg-avatar';
+        avatar.textContent = '◆';
+        wrap.appendChild(avatar);
+      }
+
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+
+      if (isTyping) {
+        bubble.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+      } else {
+        bubble.textContent = content;
+      }
+
+      wrap.appendChild(bubble);
+
+      if (role === 'user') {
+        const avatar = document.createElement('div');
+        avatar.className = 'msg-avatar msg-avatar--user';
+        avatar.textContent = currentUser?.email?.[0]?.toUpperCase() || 'U';
+        wrap.appendChild(avatar);
+      }
+
+      messagesList.appendChild(wrap);
+      scrollToBottom();
+      return wrap;
+    }
+
+    function scrollToBottom() {
+      const wrap = document.getElementById('chatMessagesWrap');
+      wrap.scrollTop = wrap.scrollHeight;
+    }
+
+    // ─── Send Message ─────────────────────────────────────────────────────────
+    async function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text || isSending) return;
+
+      isSending = true;
+      sendBtn.disabled = true;
+      chatInput.value = '';
+      chatInput.style.height = 'auto';
+
+      // Add user message to UI and history
+      addMessage('user', text);
+      conversationHistory.push({ role: 'user', content: text });
+
+      // Show typing indicator
+      const typingEl = addMessage('assistant', '', true);
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: conversationHistory })
+        });
+
+        const data = await res.json();
+        typingEl.remove();
+
+        if (res.ok && data.reply) {
+          conversationHistory.push({ role: 'assistant', content: data.reply });
+          addMessage('assistant', data.reply);
+        } else if (data.error === 'access_denied') {
+          // Trial expired mid-session
+          chatState.style.display = 'none';
+          lockedState.style.display = 'flex';
+        } else {
+          addMessage('assistant', data.error || 'I encountered an error. Please try again.');
+        }
+      } catch (e) {
+        typingEl.remove();
+        addMessage('assistant', 'Network error. Please check your connection and try again.');
+      } finally {
+        isSending = false;
+        sendBtn.disabled = false;
+        chatInput.focus();
+      }
+    }
+
+    // ─── Input Auto-resize ────────────────────────────────────────────────────
+    chatInput.addEventListener('input', function () {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 160) + 'px';
+    });
+
+    chatInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    // ─── Logout ───────────────────────────────────────────────────────────────
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        await fetch('/logout', { method: 'POST' });
+        window.location.href = '/';
+      } catch (e) {
+        window.location.href = '/';
+      }
+    });
+
+    // ─── Boot ─────────────────────────────────────────────────────────────────
+    init();
+  </script>
+</body>
+</html>

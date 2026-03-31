@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexusAI — Your 24/7 AI Business Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">◆</span>
+        <span class="logo-text">Nexus<em>AI</em></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/login" class="nav-login">Sign In</a></li>
+        <li><a href="/register" class="nav-cta">Get Started</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        AI-Powered · Available 24/7 · Enterprise-Grade
+      </div>
+      <h1 class="hero-title">
+        Your Business Never<br/>
+        <em>Sleeps Again.</em>
+      </h1>
+      <p class="hero-sub">
+        NexusAI qualifies leads, answers questions, and converts prospects
+        into clients — automatically, around the clock, while you focus on
+        what matters.
+      </p>
+      <div class="hero-actions">
+        <a href="/register" class="btn-primary">
+          <span>Start Free Trial</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="btn-whatsapp">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 .005 5.367.005 11.993c0 2.117.55 4.104 1.508 5.831L0 24l6.335-1.652A11.955 11.955 0 0011.998 24c6.626 0 11.993-5.367 11.993-11.993C23.991 5.367 18.624 0 11.998 0zm0 21.818a9.824 9.824 0 01-5.012-1.373l-.359-.215-3.722.97.993-3.623-.236-.373a9.795 9.795 0 01-1.504-5.204c0-5.42 4.411-9.831 9.84-9.831 5.43 0 9.841 4.411 9.841 9.831 0 5.419-4.411 9.818-9.841 9.818z"/></svg>
+          Contact on WhatsApp
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Always On</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">3×</span>
+          <span class="stat-label">Lead Conversion</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num">< 2s</span>
+          <span class="stat-label">Response Time</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="chat-mockup">
+        <div class="chat-header">
+          <div class="chat-avatar">◆</div>
+          <div>
+            <div class="chat-name">NexusAI Assistant</div>
+            <div class="chat-status"><span class="online-dot"></span> Online now</div>
+          </div>
+        </div>
+        <div class="chat-messages">
+          <div class="msg msg-ai">Hello! I'm here to help you grow your business. What challenge are you facing today?</div>
+          <div class="msg msg-user">We're struggling to follow up with leads fast enough.</div>
+          <div class="msg msg-ai">That's a common bottleneck. I can qualify and engage every lead instantly — 24/7. How many leads do you typically receive per week?</div>
+          <div class="msg msg-user">Around 50–80 per week.</div>
+          <div class="msg msg-ai typing">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="section-inner">
+      <div class="section-label">CAPABILITIES</div>
+      <h2 class="section-title">Everything Your Business Needs<br/><em>Running Automatically</em></h2>
+      <p class="section-sub">From first contact to closed deal — NexusAI handles the entire customer journey.</p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Instant Lead Qualification</h3>
+          <p>Engage every inbound lead within seconds. Ask smart questions, score interest, and surface your hottest prospects automatically.</p>
+        </div>
+        <div class="feature-card feature-card--highlight">
+          <div class="feature-icon">🧠</div>
+          <h3>GPT-4 Intelligence</h3>
+          <p>Powered by OpenAI's latest models, NexusAI understands nuance, handles objections, and crafts personalised responses that feel genuinely human.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>24/7 Sales Automation</h3>
+          <p>Never miss a lead outside business hours again. NexusAI works nights, weekends, and holidays — capturing revenue you'd otherwise lose.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <h3>Funnel Optimisation</h3>
+          <p>Guide prospects through your sales funnel with precision. Each interaction is crafted to move them closer to booking a call or making a purchase.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>Secure & Compliant</h3>
+          <p>Enterprise-grade security with encrypted sessions, hashed credentials, and data practices that respect your clients' privacy.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3>Easy Deployment</h3>
+          <p>Live in minutes. No complex integrations, no developer required. Deploy to your website and start capturing leads immediately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <div class="section-inner">
+      <div class="section-label">PROCESS</div>
+      <h2 class="section-title">From Sign Up to <em>First Conversion</em></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">01</div>
+          <h3>Register & Deploy</h3>
+          <p>Create your account, configure your assistant, and embed it in minutes. Your 2-day trial starts immediately.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-number">02</div>
+          <h3>AI Qualifies Leads</h3>
+          <p>Every visitor gets a personalised conversation. NexusAI asks the right questions and identifies your most valuable prospects.</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step">
+          <div class="step-number">03</div>
+          <h3>You Close the Deal</h3>
+          <p>Receive warm, pre-qualified leads ready for your team. Focus your energy on closing, not chasing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <div class="section-inner">
+      <div class="section-label">PRICING</div>
+      <h2 class="section-title">Simple, Transparent<br/><em>Pricing</em></h2>
+      <p class="section-sub">Start free. Upgrade when you're ready. No hidden fees.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-badge">Free Trial</div>
+          <div class="pricing-price">$0</div>
+          <div class="pricing-period">2 days, full access</div>
+          <ul class="pricing-features">
+            <li>✓ Full AI chat access</li>
+            <li>✓ Lead qualification engine</li>
+            <li>✓ Unlimited conversations</li>
+            <li>✓ 24/7 availability</li>
+          </ul>
+          <a href="/register" class="pricing-btn pricing-btn--outline">Start Free Trial</a>
+        </div>
+        <div class="pricing-card pricing-card--featured">
+          <div class="pricing-badge pricing-badge--gold">Most Popular</div>
+          <div class="pricing-price">$49<span>/mo</span></div>
+          <div class="pricing-period">per month, billed monthly</div>
+          <ul class="pricing-features">
+            <li>✓ Everything in trial</li>
+            <li>✓ Priority AI responses</li>
+            <li>✓ Advanced lead scoring</li>
+            <li>✓ Dedicated support</li>
+            <li>✓ Custom AI personality</li>
+          </ul>
+          <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="pricing-btn pricing-btn--gold">Activate Now</a>
+        </div>
+      </div>
+      <p class="pricing-note">
+        Payment via PayPal to <strong>kingtizian008@gmail.com</strong> · 
+        Contact <a href="https://wa.me/0742251656" target="_blank" rel="noopener">WhatsApp 0742251656</a> for instant activation
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section class="contact" id="contact">
+    <div class="section-inner">
+      <div class="contact-card">
+        <div class="section-label">GET IN TOUCH</div>
+        <h2 class="section-title">Ready to Transform<br/><em>Your Business?</em></h2>
+        <p>Talk to a real human on WhatsApp — we'll answer your questions, walk you through the platform, and get you set up in minutes.</p>
+        <div class="contact-actions">
+          <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="btn-whatsapp btn-whatsapp--large">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 .005 5.367.005 11.993c0 2.117.55 4.104 1.508 5.831L0 24l6.335-1.652A11.955 11.955 0 0011.998 24c6.626 0 11.993-5.367 11.993-11.993C23.991 5.367 18.624 0 11.998 0zm0 21.818a9.824 9.824 0 01-5.012-1.373l-.359-.215-3.722.97.993-3.623-.236-.373a9.795 9.795 0 01-1.504-5.204c0-5.42 4.411-9.831 9.84-9.831 5.43 0 9.841 4.411 9.841 9.831 0 5.419-4.411 9.818-9.841 9.818z"/></svg>
+            Chat on WhatsApp
+          </a>
+          <a href="/register" class="btn-primary">Start Free Trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="/" class="logo">
+        <span class="logo-icon">◆</span>
+        <span class="logo-text">Nexus<em>AI</em></span>
+      </a>
+      <p class="footer-copy">© 2025 NexusAI. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+        <a href="https://wa.me/0742251656" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Contact on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 .005 5.367.005 11.993c0 2.117.55 4.104 1.508 5.831L0 24l6.335-1.652A11.955 11.955 0 0011.998 24c6.626 0 11.993-5.367 11.993-11.993C23.991 5.367 18.624 0 11.998 0zm0 21.818a9.824 9.824 0 01-5.012-1.373l-.359-.215-3.722.97.993-3.623-.236-.373a9.795 9.795 0 01-1.504-5.204c0-5.42 4.411-9.831 9.84-9.831 5.43 0 9.841 4.411 9.841 9.831 0 5.419-4.411 9.818-9.841 9.818z"/></svg>
+  </a>
+
+  <script src="/app.js"></script>
+</body>
+</html>

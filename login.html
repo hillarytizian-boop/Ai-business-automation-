@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — NexusAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="auth-page">
+
+  <div class="auth-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <div class="auth-container">
+    <a href="/" class="logo auth-logo">
+      <span class="logo-icon">◆</span>
+      <span class="logo-text">Nexus<em>AI</em></span>
+    </a>
+
+    <div class="auth-card">
+      <h1 class="auth-title">Welcome Back</h1>
+      <p class="auth-sub">Sign in to your business assistant dashboard</p>
+
+      <div id="alert" class="alert" style="display:none"></div>
+
+      <div class="auth-form">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="you@company.com" autocomplete="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required />
+            <button type="button" class="toggle-pass" id="togglePass" aria-label="Toggle password">
+              <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+        <button class="btn-primary btn-full" id="loginBtn">
+          <span id="btnText">Sign In</span>
+          <span id="btnSpinner" class="spinner" style="display:none"></span>
+        </button>
+      </div>
+
+      <p class="auth-switch">
+        Don't have an account? <a href="/register">Create one free</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/0742251656" target="_blank" rel="noopener" class="fab-whatsapp" aria-label="Contact on WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.998 0C5.372 0 .005 5.367.005 11.993c0 2.117.55 4.104 1.508 5.831L0 24l6.335-1.652A11.955 11.955 0 0011.998 24c6.626 0 11.993-5.367 11.993-11.993C23.991 5.367 18.624 0 11.998 0zm0 21.818a9.824 9.824 0 01-5.012-1.373l-.359-.215-3.722.97.993-3.623-.236-.373a9.795 9.795 0 01-1.504-5.204c0-5.42 4.411-9.831 9.84-9.831 5.43 0 9.841 4.411 9.841 9.831 0 5.419-4.411 9.818-9.841 9.818z"/></svg>
+  </a>
+
+  <script>
+    // Login form logic
+    const emailInput = document.getElementById('email');
+    const passInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const alertBox = document.getElementById('alert');
+    const togglePass = document.getElementById('togglePass');
+
+    function showAlert(msg, type = 'error') {
+      alertBox.textContent = msg;
+      alertBox.className = `alert alert--${type}`;
+      alertBox.style.display = 'block';
+    }
+
+    function setLoading(state) {
+      loginBtn.disabled = state;
+      btnText.style.display = state ? 'none' : 'inline';
+      btnSpinner.style.display = state ? 'inline-block' : 'none';
+    }
+
+    togglePass.addEventListener('click', () => {
+      const isPass = passInput.type === 'password';
+      passInput.type = isPass ? 'text' : 'password';
+    });
+
+    async function doLogin() {
+      const email = emailInput.value.trim();
+      const password = passInput.value;
+      if (!email || !password) { showAlert('Please fill in all fields.'); return; }
+
+      setLoading(true);
+      alertBox.style.display = 'none';
+
+      try {
+        const res = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          showAlert('Login successful! Redirecting…', 'success');
+          setTimeout(() => { window.location.href = data.redirect || '/dashboard'; }, 800);
+        } else {
+          showAlert(data.error || 'Login failed. Please try again.');
+        }
+      } catch (e) {
+        showAlert('Network error. Please check your connection.');
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loginBtn.addEventListener('click', doLogin);
+    [emailInput, passInput].forEach(el => el.addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); }));
+  </script>
+</body>
+</html>

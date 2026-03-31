@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — NexusAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .admin-page { background: var(--clr-bg); min-height: 100vh; padding: 2rem 1rem; }
+    .admin-wrap { max-width: 960px; margin: 0 auto; }
+    .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .admin-title { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--clr-gold); }
+    .admin-token-form { display: flex; gap: .75rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .admin-token-form input { flex: 1; min-width: 200px; background: var(--clr-surface); border: 1px solid var(--clr-border); color: var(--clr-text); padding: .75rem 1rem; border-radius: 8px; font-family: 'Sora', sans-serif; font-size: .9rem; }
+    .admin-token-form input:focus { outline: none; border-color: var(--clr-gold); }
+    .admin-section { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .admin-section h2 { color: var(--clr-gold); font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 1rem; }
+    .admin-action-form { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .admin-action-form input { flex: 1; min-width: 200px; background: var(--clr-bg); border: 1px solid var(--clr-border); color: var(--clr-text); padding: .65rem 1rem; border-radius: 8px; font-family: 'Sora', sans-serif; font-size: .875rem; }
+    .admin-action-form input:focus { outline: none; border-color: var(--clr-gold); }
+    .btn-activate { background: var(--clr-gold); color: #000; border: none; padding: .65rem 1.25rem; border-radius: 8px; font-family: 'Sora', sans-serif; font-weight: 600; font-size: .875rem; cursor: pointer; transition: opacity .2s; }
+    .btn-activate:hover { opacity: .85; }
+    .btn-deactivate { background: transparent; color: var(--clr-error, #e05); border: 1px solid var(--clr-error, #e05); padding: .65rem 1.25rem; border-radius: 8px; font-family: 'Sora', sans-serif; font-weight: 600; font-size: .875rem; cursor: pointer; transition: all .2s; }
+    .btn-deactivate:hover { background: var(--clr-error, #e05); color: #fff; }
+    .users-table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+    .users-table th { text-align: left; padding: .75rem 1rem; color: var(--clr-muted); font-weight: 500; border-bottom: 1px solid var(--clr-border); }
+    .users-table td { padding: .75rem 1rem; border-bottom: 1px solid var(--clr-border); color: var(--clr-text); }
+    .users-table tr:last-child td { border-bottom: none; }
+    .users-table tr:hover td { background: rgba(255,255,255,.02); }
+    .status-paid { color: #4ade80; font-weight: 600; }
+    .status-trial { color: var(--clr-gold); }
+    .status-expired { color: #ef4444; }
+    .action-btns { display: flex; gap: .5rem; }
+    .btn-sm { padding: .4rem .8rem; font-size: .8rem; border-radius: 6px; cursor: pointer; font-family: 'Sora', sans-serif; font-weight: 500; border: 1px solid transparent; transition: all .15s; }
+    .btn-sm-activate { background: rgba(201,162,39,.15); color: var(--clr-gold); border-color: rgba(201,162,39,.3); }
+    .btn-sm-activate:hover { background: var(--clr-gold); color: #000; }
+    .btn-sm-deactivate { background: rgba(239,68,68,.1); color: #ef4444; border-color: rgba(239,68,68,.3); }
+    .btn-sm-deactivate:hover { background: #ef4444; color: #fff; }
+    .admin-alert { padding: .75rem 1rem; border-radius: 8px; margin-bottom: 1rem; font-size: .9rem; }
+    .admin-alert.success { background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.3); color: #4ade80; }
+    .admin-alert.error { background: rgba(239,68,68,.1); border: 1px solid rgba(239,68,68,.3); color: #ef4444; }
+    .load-btn { background: var(--clr-surface); border: 1px solid var(--clr-gold); color: var(--clr-gold); padding: .65rem 1.25rem; border-radius: 8px; font-family: 'Sora', sans-serif; font-weight: 600; font-size: .875rem; cursor: pointer; transition: all .2s; }
+    .load-btn:hover { background: var(--clr-gold); color: #000; }
+    .empty-state { text-align: center; color: var(--clr-muted); padding: 2rem; }
+    .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+    .stat-card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 10px; padding: 1rem 1.25rem; }
+    .stat-card .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2rem; color: var(--clr-gold); }
+    .stat-card .stat-label { font-size: .8rem; color: var(--clr-muted); margin-top: .25rem; }
+    @media (max-width: 640px) {
+      .users-table thead { display: none; }
+      .users-table tr { display: block; border: 1px solid var(--clr-border); border-radius: 8px; margin-bottom: .75rem; padding: .5rem; }
+      .users-table td { display: flex; justify-content: space-between; border-bottom: none; padding: .4rem .5rem; }
+      .users-table td::before { content: attr(data-label); color: var(--clr-muted); font-size: .8rem; }
+    }
+  </style>
+</head>
+<body class="admin-page">
+  <div class="admin-wrap">
+    <div class="admin-header">
+      <div class="admin-title">◆ NexusAI Admin Panel</div>
+      <a href="/" style="color:var(--clr-muted);font-size:.875rem;text-decoration:none">← Back to site</a>
+    </div>
+
+    <!-- Token Input -->
+    <div class="admin-section">
+      <h2>Authentication</h2>
+      <div class="admin-token-form">
+        <input type="password" id="adminToken" placeholder="Enter admin token from .env" />
+        <button class="load-btn" id="loadUsersBtn">Load Users</button>
+      </div>
+      <div id="adminAlert" style="display:none" class="admin-alert"></div>
+    </div>
+
+    <!-- Stats -->
+    <div id="statsSection" style="display:none">
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total Users</div></div>
+        <div class="stat-card"><div class="stat-num" id="statPaid">0</div><div class="stat-label">Paid Users</div></div>
+        <div class="stat-card"><div class="stat-num" id="statTrial">0</div><div class="stat-label">Active Trials</div></div>
+        <div class="stat-card"><div class="stat-num" id="statExpired">0</div><div class="stat-label">Expired Trials</div></div>
+      </div>
+    </div>
+
+    <!-- Quick Activate -->
+    <div class="admin-section">
+      <h2>Quick Activate / Deactivate</h2>
+      <div class="admin-action-form">
+        <input type="email" id="actionEmail" placeholder="user@example.com" />
+        <button class="btn-activate" id="activateBtn">Activate User</button>
+        <button class="btn-deactivate" id="deactivateBtn">Deactivate</button>
+      </div>
+    </div>
+
+    <!-- Users Table -->
+    <div class="admin-section" id="usersSection" style="display:none">
+      <h2>All Users</h2>
+      <div style="overflow-x:auto">
+        <table class="users-table" id="usersTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Trial End</th>
+              <th>Registered</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const adminToken = document.getElementById('adminToken');
+    const adminAlert = document.getElementById('adminAlert');
+    const loadUsersBtn = document.getElementById('loadUsersBtn');
+    const activateBtn = document.getElementById('activateBtn');
+    const deactivateBtn = document.getElementById('deactivateBtn');
+    const actionEmail = document.getElementById('actionEmail');
+    const usersSection = document.getElementById('usersSection');
+    const statsSection = document.getElementById('statsSection');
+    const usersBody = document.getElementById('usersBody');
+
+    function showAlert(msg, type = 'error') {
+      adminAlert.textContent = msg;
+      adminAlert.className = `admin-alert ${type}`;
+      adminAlert.style.display = 'block';
+      setTimeout(() => { adminAlert.style.display = 'none'; }, 4000);
+    }
+
+    function formatDate(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      return d.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+
+    async function loadUsers() {
+      const token = adminToken.value.trim();
+      if (!token) { showAlert('Enter admin token first.'); return; }
+      try {
+        const res = await fetch('/admin/users?admin_token=' + encodeURIComponent(token));
+        const data = await res.json();
+        if (!res.ok) { showAlert(data.error || 'Failed to load users.'); return; }
+
+        const users = data.users;
+        const paid = users.filter(u => u.is_paid).length;
+        const activeTrial = users.filter(u => !u.is_paid && !u.trial_expired).length;
+        const expired = users.filter(u => !u.is_paid && u.trial_expired).length;
+
+        document.getElementById('statTotal').textContent = users.length;
+        document.getElementById('statPaid').textContent = paid;
+        document.getElementById('statTrial').textContent = activeTrial;
+        document.getElementById('statExpired').textContent = expired;
+        statsSection.style.display = 'block';
+
+        if (users.length === 0) {
+          usersBody.innerHTML = '<tr><td colspan="6" class="empty-state">No users registered yet.</td></tr>';
+        } else {
+          usersBody.innerHTML = users.map(u => {
+            const statusHtml = u.is_paid
+              ? '<span class="status-paid">● Paid</span>'
+              : u.trial_expired
+                ? '<span class="status-expired">● Expired</span>'
+                : '<span class="status-trial">● Trial</span>';
+            return `<tr>
+              <td data-label="ID">${u.id}</td>
+              <td data-label="Email">${u.email}</td>
+              <td data-label="Status">${statusHtml}</td>
+              <td data-label="Trial End">${formatDate(u.trial_end)}</td>
+              <td data-label="Registered">${formatDate(u.created_at)}</td>
+              <td data-label="Actions">
+                <div class="action-btns">
+                  ${!u.is_paid ? `<button class="btn-sm btn-sm-activate" onclick="quickAction('${u.email}','activate')">Activate</button>` : `<button class="btn-sm btn-sm-deactivate" onclick="quickAction('${u.email}','deactivate')">Deactivate</button>`}
+                </div>
+              </td>
+            </tr>`;
+          }).join('');
+        }
+        usersSection.style.display = 'block';
+        showAlert(`Loaded ${users.length} users.`, 'success');
+      } catch (e) {
+        showAlert('Network error. Check server.');
+      }
+    }
+
+    async function quickAction(email, action) {
+      const token = adminToken.value.trim();
+      if (!token) { showAlert('Enter admin token first.'); return; }
+      try {
+        const res = await fetch(`/admin/${action}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (res.ok) { showAlert(data.message, 'success'); loadUsers(); }
+        else showAlert(data.error || 'Action failed.');
+      } catch (e) {
+        showAlert('Network error.');
+      }
+    }
+
+    loadUsersBtn.addEventListener('click', loadUsers);
+
+    activateBtn.addEventListener('click', () => {
+      const email = actionEmail.value.trim();
+      if (!email) { showAlert('Enter an email.'); return; }
+      quickAction(email, 'activate');
+    });
+
+    deactivateBtn.addEventListener('click', () => {
+      const email = actionEmail.value.trim();
+      if (!email) { showAlert('Enter an email.'); return; }
+      quickAction(email, 'deactivate');
+    });
+
+    adminToken.addEventListener('keydown', e => { if (e.key === 'Enter') loadUsers(); });
+  </script>
+</body>
+</html>
