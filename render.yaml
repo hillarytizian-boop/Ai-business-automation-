@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: ai-business-assistant
+    env: node
+    region: oregon
+    plan: starter          # upgrade to 'standard' for persistent disk support
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SESSION_SECRET
+        generateValue: true   # Render auto-generates a secure secret
+      - key: OPENAI_API_KEY
+        sync: false           # Set manually in Render dashboard
+      - key: ADMIN_TOKEN
+        sync: false           # Set manually in Render dashboard
+      # Uncomment and set DB_PATH if using a persistent disk (see below)
+      # - key: DB_PATH
+      #   value: /data/business_assistant.db
+
+    # ─── Persistent Disk (Recommended for production) ─────────────────────
+    # SQLite data is stored on ephemeral storage by default and will be RESET
+    # on every redeploy. To persist your database across deploys, uncomment
+    # the disk section below. Note: persistent disks require a paid Render plan.
+    #
+    # disk:
+    #   name: nexusai-data
+    #   mountPath: /data
+    #   sizeGB: 1
